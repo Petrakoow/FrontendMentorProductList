@@ -1,0 +1,41 @@
+@mixin breakpoint-down($size-name) {
+    @media screen and (max-width: map-get($breakpoint-down, $size-name)) {
+        @content;
+    }
+}
+
+@mixin breakpoint-up() {
+    @media screen and (min-width: map-get($breakpoint-up, $size-name)) {
+        @content;
+    }
+}
+
+@mixin no-hover() {
+    @media (hover: none) {
+        @content;
+    }
+}
+
+@mixin hover() {
+    @media (hover: hover) {
+        @content;
+    }
+}
+
+@mixin activeStateButton {
+    border-color: $Red;
+    color: $Red;
+}
+
+@mixin activeStateOrderButton {
+    background-color: $DarkRed;
+}
+
+@mixin activeStateIncDecButton {
+    background-color: $White;
+    svg {
+        path {
+            fill: $Red;
+        }
+    }
+}

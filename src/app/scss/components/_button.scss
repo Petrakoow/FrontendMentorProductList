@@ -1,0 +1,128 @@
+.button {
+    background-color: $White;
+    text-align: center;
+    font-family: inherit;
+    border: none;
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &--add-cart,
+    &--remove-item,
+    &--create-order,
+    &--start-new-order,
+    &--action {
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &--add-cart,
+    &--increase-decrease-wrapper {
+        border-radius: 50px;
+        padding: 10px 24px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        min-width: 151px;
+    }
+
+    &--add-cart {
+        border: 1px solid $Rose-400;
+        gap: 7px;
+        color: $Rose-900;
+
+        @include no-hover {
+            &:active {
+                @include activeStateButton;
+            }
+        }
+
+        @include hover {
+            &:hover {
+                @include activeStateButton;
+            }
+        }
+    }
+
+    &--increase-decrease-wrapper{
+        background-color: $Red;
+        justify-content: space-between;
+        padding: 10px 12px;
+    }
+
+    &--action{
+        border-radius: 50%;
+        background: none;
+        border: 1px solid $White;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        @include no-hover {
+            &:active {
+                @include activeStateIncDecButton;
+            }
+        }
+
+        @include hover {
+            &:hover {
+                @include activeStateIncDecButton;
+            }
+        }
+    }
+
+    &--remove-item {
+        border: 1px solid $Rose-400;
+        border-radius: 50%;
+        padding: 3px;
+        & > :first-child {
+            display: block;
+        }
+    }
+    &--create-order {
+        border-radius: 32px;
+        background-color: $Red;
+        padding-block: 16px;
+        color: $White;
+        font-size: px-to-rem(16px);
+        font-weight: 600;
+
+        @include no-hover {
+            &:active {
+                @include activeStateOrderButton;
+            }
+        }
+
+        @include hover {
+            &:hover {
+                @include activeStateOrderButton;
+            }
+        }
+    }
+
+    &--start-new-order{
+        background-color: $Red;
+        display: block;
+        width: 100%;
+        font-size: px-to-rem(16px);
+        padding: 16px;
+        border-radius: 36px;
+        font-weight: 600;
+        color: $White;
+
+        @include no-hover {
+            &:active {
+                @include activeStateOrderButton;
+            }
+        }
+
+        @include hover {
+            &:hover {
+                @include activeStateOrderButton;
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.container {
+    min-width: $mobile-wcag;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: calc(($desktop - 112px * 2) + 2 * $padding-layout);
+    &--center {
+        margin: 0 auto;
+    }
+    &--pd-clamp {
+        padding: clamp($padding-layout, calc((100vw - 800px) * 0.25), 64px) 24px;
+    }
+    &__main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+        margin-bottom: 48px;
+    }
+}

@@ -1,0 +1,24 @@
+//This 7-1 template was generated,
+//Details at https://github.com/Petrakoow/scss-template-7-1
+
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+
+
+@import "base/reset";
+@import "base/typography";
+@import "base/body";
+
+@import "layout/container";
+@import "layout/grid";
+@import "layout/footer";
+@import "layout/aside";
+
+@import "components/cart";
+@import "components/product";
+@import "components/button";
+@import "components/order";
+
+@import "pages/desserts";
+@import "abstracts/effects";

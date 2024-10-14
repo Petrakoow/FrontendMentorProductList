@@ -1,0 +1,85 @@
+.order {
+    position: fixed;
+    background-color: rgba($color: #000, $alpha: 0.6);
+    inset: 0;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__menu {
+        min-width: $mobile-wcag;
+        width: $order;
+        background-color: $White;
+        padding: 42px;
+        border-radius: 10px;
+    }
+    &__success {
+        margin-bottom: 14px;
+    }
+    &__congratulation {
+        font-size: px-to-rem(40px);
+        font-weight: 700;
+        color: $Rose-900;
+    }
+    &__description {
+        color: $Rose-500;
+        margin-bottom: 32px;
+    }
+    &__information{
+        background-color: $Rose-50;
+        border-radius: 10px;
+        padding: 24px;
+        margin-bottom: 32px;
+    }
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 32px;
+    }
+    &__product {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid $Rose-100;
+    }
+    &__details {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+    }
+    &__img {
+        border-radius: 10px;
+        width: 48px;
+        height: 48px;
+    }
+    &__name {
+        color: $Rose-900;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    &__count {
+        font-weight: 600;
+        color: $Red;
+        margin-right: 16px;
+    }
+    &__price {
+        color: $Rose-500;
+    }
+    &__total {
+        font-weight: 600;
+        color: $Rose-900;
+        font-size: px-to-rem(20px);
+    }
+    &__result{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__result-price{
+        font-size: 24px;
+        font-weight: 700;
+    }
+}

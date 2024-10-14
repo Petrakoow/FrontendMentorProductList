@@ -1,0 +1,12 @@
+.grid {
+    display: grid;
+    &--gc-r {
+        grid-template: auto / 2fr 1fr;
+        column-gap: 32px;
+    }
+    &--g {
+        grid-template: auto / repeat(3, 250px);
+        column-gap: 24px;
+        row-gap: 32px;
+    }
+}
