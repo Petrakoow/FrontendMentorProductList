@@ -40,7 +40,6 @@ const Cart = {
 
     decreaseCartCount(product) {
         const basketElement = this.getProductFromCart(product);
-        console.log(basketElement);
         if (!basketElement) throw new Error("Product doesn't exist in Cart");
 
         if (basketElement.count > 1) {
