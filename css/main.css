@@ -65,7 +65,7 @@ table {
 }
 @font-face {
   font-family: "Red Hat Text";
-  src: url("/assets/fonts/static/RedHatText-SemiBold.woff2");
+  src: url("./assets/fonts/static/RedHatText-SemiBold.woff2");
   font-weight: 600;
   font-display: swap;
   font-style: normal;
