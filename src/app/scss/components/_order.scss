@@ -26,7 +26,7 @@
         color: $Rose-500;
         margin-bottom: 32px;
     }
-    &__information{
+    &__information {
         background-color: $Rose-50;
         border-radius: 10px;
         padding: 24px;
@@ -42,6 +42,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 10px;
         padding-bottom: 20px;
         border-bottom: 1px solid $Rose-100;
     }
@@ -59,26 +60,44 @@
         color: $Rose-900;
         font-weight: 600;
         margin-bottom: 5px;
+
+        @include breakpoint-down("mobile-l") {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 130px;
+        }
+
+        @include breakpoint-down("mobile-s") {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 60px;
+        }
+        font-size: px-to-rem(14px);
     }
     &__count {
         font-weight: 600;
         color: $Red;
         margin-right: 16px;
+        font-size: px-to-rem(14px);
     }
     &__price {
         color: $Rose-500;
+        white-space: nowrap;
+        font-size: px-to-rem(14px);
     }
     &__total {
         font-weight: 600;
         color: $Rose-900;
-        font-size: px-to-rem(16px);
+        font-size: px-to-rem(14px);
     }
-    &__result{
+    &__result {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    &__result-price{
+    &__result-price {
         font-size: px-to-rem(24px);
         font-weight: 700;
     }

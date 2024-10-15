@@ -543,6 +543,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  gap: 10px;
   padding-bottom: 20px;
   border-bottom: 1px solid hsl(13, 31%, 94%);
 }
@@ -564,19 +565,39 @@ body {
   color: hsl(14, 65%, 9%);
   font-weight: 600;
   margin-bottom: 5px;
+  font-size: 0.875rem;
+}
+@media screen and (max-width: 425px) {
+  .order__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 130px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .order__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60px;
+  }
 }
 .order__count {
   font-weight: 600;
   color: hsl(14, 86%, 42%);
   margin-right: 16px;
+  font-size: 0.875rem;
 }
 .order__price {
   color: hsl(12, 20%, 44%);
+  white-space: nowrap;
+  font-size: 0.875rem;
 }
 .order__total {
   font-weight: 600;
   color: hsl(14, 65%, 9%);
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 .order__result {
   display: -webkit-box;
