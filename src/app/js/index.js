@@ -3,20 +3,27 @@ import { Cart } from "./cart.js";
 
 import { ProductUIManager } from "./ProductManager.js";
 import { ManagementUIManager } from "./ManagementManager.js";
+import { OrderUIManager } from "./OrderManager.js";
 
-import { ParserToHTMLProduct, ParserToHTMLCart } from "./parser.js";
+import {
+    ParserToHTMLProduct,
+    ParserToHTMLCart,
+    ParserToHTMLOrder,
+} from "./parser.js";
 
 const Controller = {
     init(params) {
         this.paramsController = params;
         this.productUIManagers = new Map();
         this.managementUIManager = Object.create(ManagementUIManager);
+        this.orderUIManager = Object.create(OrderUIManager);
 
         fetch(this.paramsController.pathToJson)
             .then((response) => response.json())
             .then((data) => {
                 this.initStaticContainers();
                 this.initManagementManager();
+                this.initOrderManager();
                 this.initProducts(data);
                 this.createCardPerPage();
                 this.initCart();
@@ -26,16 +33,16 @@ const Controller = {
             .catch((error) =>
                 console.error("Error fetching product data:", error)
             );
+
+        return this;
     },
 
     initStaticContainers() {
-        const ids = this.paramsController.ids;
-        this.productContainerElement = document.getElementById(
-            ids.productContainerId
-        );
-        this.basketContainerElement = document.getElementById(
-            ids.cartContainerId
-        );
+        this.productContainerElement =
+            document.getElementById("productContainerId");
+        this.basketContainerElement = document.getElementById("cartStorageId");
+        this.orderContainerElement =
+            document.getElementById("orderContainerId");
     },
 
     initManagementManager() {
@@ -50,6 +57,12 @@ const Controller = {
             totalCountElement,
             totalPriceElement
         );
+    },
+
+    initOrderManager() {
+        const orderElement = document.getElementById("orderBlockId");
+        const orderResultPrice = document.getElementById("orderResultPriceId");
+        this.orderUIManager.init(orderElement, orderResultPrice);
     },
 
     initProducts(data) {
@@ -88,7 +101,9 @@ const Controller = {
     bindProductEvents() {
         this.handleAddToCart();
         this.handleDeleteProductFromCart();
-        this.handlerButtonIncreaseDecrease();
+        this.handleIncreaseDecrease();
+        this.handleAcceptOrder();
+        this.handleStartNewOrder();
     },
 
     handleAddToCart() {
@@ -114,9 +129,7 @@ const Controller = {
 
     addProductToCart(product, productUIManager) {
         product.addProductToCart(this.cart);
-        const productFromCart = product.getPeekProductFromCart(this.cart);
-
-        const cartElement = ParserToHTMLCart.convert(productFromCart);
+        const cartElement = ParserToHTMLCart.convert(product);
         productUIManager.setCartElement(cartElement);
         this.managementUIManager.toggleCart(true);
         this.basketContainerElement.appendChild(cartElement);
@@ -142,13 +155,13 @@ const Controller = {
                     const productUIManager =
                         this.productUIManagers.get(category);
                     product.deleteProduct(this.cart);
-                    this.removeProductFromCart(product, productUIManager);
+                    this.removeProductFromCart(productUIManager);
                 }
             }
         });
     },
 
-    removeProductFromCart(product, productUIManager) {
+    removeProductFromCart(productUIManager) {
         try {
             productUIManager.deleteCartElement();
             this.managementUIManager.updateCartTotals(this.cart);
@@ -161,7 +174,7 @@ const Controller = {
         }
     },
 
-    handlerButtonIncreaseDecrease() {
+    handleIncreaseDecrease() {
         const increaseDecreaseButtons = document.querySelectorAll(
             ".button--increase-decrease-wrapper button"
         );
@@ -197,7 +210,7 @@ const Controller = {
         if (button === button.parentElement.firstElementChild) {
             const executeStatus = product.decrease(this.cart);
             if (!executeStatus) {
-                this.removeProductFromCart(product, productUIManager);
+                this.removeProductFromCart(productUIManager);
             }
         } else {
             product.increase(this.cart);
@@ -216,33 +229,42 @@ const Controller = {
             product.price
         );
     },
+
+    handleAcceptOrder() {
+        const orderAcceptButton = document.getElementById("confirmOrderId");
+        orderAcceptButton.addEventListener("click", (event) => {
+            this.orderContainerElement.innerHTML = "";
+            this.cart.getCartArray().forEach((cartProduct) => {
+                const orderProductElement =
+                    ParserToHTMLOrder.convert(cartProduct);
+                this.orderContainerElement.appendChild(orderProductElement);
+            });
+
+            this.orderUIManager.setTotalPrice(this.cart.getTotalCartPrice());
+            this.orderUIManager.toggleOrderInfo(true);
+        });
+    },
+
+    handleStartNewOrder() {
+        const orderStartNewOrder = document.getElementById("startNewOrderId");
+        orderStartNewOrder.addEventListener("click", (event) => {
+            this.orderUIManager.toggleOrderInfo(false);
+            this.cart.getCartArray().forEach((cartProduct) => {
+                const product = cartProduct.product;
+                product.deleteProduct(this.cart);
+                const productUIManager = this.productUIManagers.get(product.category);
+                this.removeProductFromCart(productUIManager);
+            });
+            this.cart.clearCart();
+            this.orderUIManager.setTotalPrice(this.cart.getTotalCartPrice());
+            this.orderContainerElement.innerHTML = "";
+        });
+    },
 };
 
 window.onload = function () {
     const params = {
         pathToJson: "app/data/data.json",
-        ids: {
-            productContainerId: "productContainerId",
-            cartContainerId: "cartStorageId",
-            cartEmptyStateId: "cartEmptyStateId",
-            cartTotalPriceId: "totalPriceId",
-            cartTotalCountId: "cartCounterId",
-            cartAddedElementId: "cartAddedStateId",
-        },
-        classes: {
-            add: ".product-preview-card__btn-add-to-cart",
-            delete: ".button.button--remove-item.product__button",
-            basketElement: ".product-added",
-            increaseDecrease: ".button--increase-decrease-wrapper",
-            buttonsContainer: ".product-preview-card__buttons-container",
-            action: ".button.button--action",
-            counter: ".product-preview-card__counter",
-            portions: ".product-added__count-portions",
-            contour: ".product-preview-card__image-container",
-        },
-        data: {
-            category: "data-category",
-        },
     };
 
     Controller.init(params);

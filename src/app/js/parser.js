@@ -10,8 +10,8 @@ const ParserToHTML = {
     },
     getMediaParams() {
         return [
-            "(min-width: 768px)",
             "(min-width: 1024px)",
+            "(min-width: 768px) and (max-width: 1023.98px)",
             "(max-width: 767.98px)",
         ];
     },
@@ -130,7 +130,7 @@ productParser.convert = function (product) {
 
 const cartParser = Object.create(ParserToHTML);
 
-cartParser.convert = function (basket) {
+cartParser.convert = function (product) {
     const storage = this.createElement("div", [
         "product-added",
         "storage__product",
@@ -141,19 +141,19 @@ cartParser.convert = function (basket) {
     const title = this.createElement(
         "p",
         ["product-added__title"],
-        basket.product.name
+        product.name
     );
     const content = this.createElement("div");
 
     [
-        { class: "product-added__count-portions", value: `${basket.count}x` },
+        { class: "product-added__count-portions", value: `${1}x` },
         {
             class: "product-added__single-price",
-            value: `@ ${showConvertPrice(basket.product.price)}`,
+            value: `@ ${showConvertPrice(product.price)}`,
         },
         {
             class: "product-added__total-price",
-            value: showConvertPrice(basket.total),
+            value: showConvertPrice(product.price),
         },
     ].forEach((item) => {
         console.log(item.class, item.value);
@@ -174,11 +174,11 @@ cartParser.convert = function (basket) {
         "product__button",
     ]);
 
-    button.dataset.category = basket.product.category;
+    button.dataset.category = product.category;
 
     const img = this.createElement("img");
     img.src = "assets/images/icon-remove-item.svg";
-    img.alt = `"Remove Product: ${basket.product.name}`;
+    img.alt = `"Remove Product: ${product.name}`;
     button.appendChild(img);
     buttonWrapper.appendChild(button);
 
@@ -189,11 +189,55 @@ cartParser.convert = function (basket) {
 
 const orderParser = Object.create(ParserToHTML);
 
-orderParser.convert = function (basket) {
-    
-}
+orderParser.convert = function (cartProduct) {
+    const article = this.createElement("article", ["order__product"]);
+    const orderDetails = this.createElement("div", ["order__details"]);
+
+    const img = this.createElement("img", ["order__img"]);
+    img.src = cartProduct.product.image.thumbnail;
+    img.alt = `Thumbnail of ${cartProduct.product.name}`;
+
+    const orderData = this.createElement("div", ["order__data"]);
+
+    const name = this.createElement(
+        "h3",
+        ["order__name"],
+        cartProduct.product.name
+    );
+
+    const count = this.createElement(
+        "span",
+        ["order__count"],
+        `${cartProduct.count}x`
+    );
+
+    const price = this.createElement(
+        "span",
+        ["order__price"],
+        `@ ${showConvertPrice(cartProduct.product.price)}`
+    );
+
+    orderData.appendChild(name);
+    orderData.appendChild(count);
+    orderData.appendChild(price);
+
+    orderDetails.appendChild(img);
+    orderDetails.appendChild(orderData);
+
+    const totalPrice = this.createElement(
+        "span",
+        ["order__total"],
+        showConvertPrice(cartProduct.total)
+    );
+
+    article.appendChild(orderDetails);
+    article.appendChild(totalPrice);
+
+    return article;
+};
 
 export {
     productParser as ParserToHTMLProduct,
-    cartParser as ParserToHTMLCart
+    cartParser as ParserToHTMLCart,
+    orderParser as ParserToHTMLOrder,
 };

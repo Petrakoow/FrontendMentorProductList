@@ -114,7 +114,7 @@
                 </div>
             </footer>
         </div>
-        <div class="order hide">
+        <div class="order hide" id="orderBlockId">
             <div class="order__menu">
                 <div class="order__success">
                     <img
@@ -123,50 +123,25 @@
                     />
                 </div>
                 <div class="order__congratulation">Order Confirmed</div>
-                <div class="order__description">We hope you enjoy your food!</div>
+                <div class="order__description">
+                    We hope you enjoy your food!
+                </div>
                 <div class="order__information">
-                    <div class="order__container">
-                        <article class="order__product">
-                            <div class="order__details">
-                                <img class="order__img" src="/assets/images/image-baklava-thumbnail.jpg" alt="Thumbnail">
-                                <div class="order__data">
-                                    <h3 class="order__name">Classic Tiramisu</h3>
-                                    <span class="order__count">1x</span>
-                                    <span class="order__price">@ $5.50</span>
-                                </div>
-                            </div>
-                            <span class="order__total">$5.50</span>
-                        </article>
-                        <article class="order__product">
-                            <div class="order__details">
-                                <img class="order__img" src="/assets/images/image-baklava-thumbnail.jpg" alt="Thumbnail">
-                                <div class="order__data">
-                                    <h3 class="order__name">Classic Tiramisu</h3>
-                                    <span class="order__count">1x</span>
-                                    <span class="order__price">@ $5.50</span>
-                                </div>
-                            </div>
-                            <span class="order__total">$5.50</span>
-                        </article>
-                        <article class="order__product">
-                            <div class="order__details">
-                                <img class="order__img" src="/assets/images/image-baklava-thumbnail.jpg" alt="Thumbnail">
-                                <div class="order__data">
-                                    <h3 class="order__name">Classic Tiramisu</h3>
-                                    <span class="order__count">1x</span>
-                                    <span class="order__price">@ $5.50</span>
-                                </div>
-                            </div>
-                            <span class="order__total">$5.50</span>
-                        </article>
-                    </div>
+                    <div class="order__container" id="orderContainerId"></div>
                     <div class="order__result">
                         <span>Order Total</span>
-                        <span class="order__result-price">$30.00</span>
+                        <span
+                            class="order__result-price"
+                            id="orderResultPriceId"
+                            ></span
+                        >
                     </div>
                 </div>
-               
-                <button class="order__start-new-order button button--start-new-order" id="startNewOrderId">
+
+                <button
+                    class="order__start-new-order button button--start-new-order"
+                    id="startNewOrderId"
+                >
                     Start New Order
                 </button>
             </div>

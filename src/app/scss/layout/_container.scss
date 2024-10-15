@@ -3,7 +3,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    width: calc(($desktop - 112px * 2) + 2 * $padding-layout);
+    max-width: calc(($desktop - 112px * 2) + 2 * $padding-layout);
     &--center {
         margin: 0 auto;
     }

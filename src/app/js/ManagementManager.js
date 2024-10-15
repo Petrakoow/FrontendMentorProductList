@@ -23,6 +23,7 @@ const ManagementUIManager = {
     },
     updateCartTotals(cart) {
         this.totalCountElement.textContent = cart.getTotalCartCount();
+        console.log(cart.getTotalCartCount());
         this.totalPriceElement.textContent = showConvertPrice(
             cart.getTotalCartPrice()
         );

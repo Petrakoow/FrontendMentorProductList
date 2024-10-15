@@ -71,7 +71,7 @@
     &__total {
         font-weight: 600;
         color: $Rose-900;
-        font-size: px-to-rem(20px);
+        font-size: px-to-rem(16px);
     }
     &__result{
         display: flex;
@@ -79,7 +79,7 @@
         align-items: center;
     }
     &__result-price{
-        font-size: 24px;
+        font-size: px-to-rem(24px);
         font-weight: 700;
     }
 }

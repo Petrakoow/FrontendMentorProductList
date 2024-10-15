@@ -64,10 +64,6 @@ const Cart = {
         return this.cartArray;
     },
 
-    getPeekProduct() {
-        return this.cartArray[this.cartArray.length - 1];
-    },
-
     getProductFromCart(prod) {
         return this.cartArray.find(
             (productElement) => productElement.product === prod

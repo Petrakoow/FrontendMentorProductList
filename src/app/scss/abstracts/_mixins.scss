@@ -4,7 +4,7 @@
     }
 }
 
-@mixin breakpoint-up() {
+@mixin breakpoint-up($size-name) {
     @media screen and (min-width: map-get($breakpoint-up, $size-name)) {
         @content;
     }
