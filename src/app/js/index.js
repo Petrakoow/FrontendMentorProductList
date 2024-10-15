@@ -1,9 +1,9 @@
 import { Product } from "./product.js";
 import { Cart } from "./cart.js";
 
-import { ProductUIManager } from "./ProductManager.js";
-import { ManagementUIManager } from "./ManagementManager.js";
-import { OrderUIManager } from "./OrderManager.js";
+import { ProductUIManager } from "./productManager.js";
+import { ManagementUIManager } from "./managementManager.js";
+import { OrderUIManager } from "./orderManager.js";
 
 import {
     ParserToHTMLProduct,
