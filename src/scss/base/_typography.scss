@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Red Hat Text";
-    src: url("/assets/fonts/static/RedHatText-Regular.woff2");
+    src: url("../assets/fonts/static/RedHatText-Regular.woff2");
     font-weight: 400;
     font-display: swap;
     font-style: normal;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: "Red Hat Text";
-    src: url("./assets/fonts/static/RedHatText-SemiBold.woff2");
+    src: url("../assets/fonts/static/RedHatText-SemiBold.woff2");
     font-weight: 600;
     font-display: swap;
     font-style: normal;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: "Red Hat Text";
-    src: url("/assets/fonts/static/RedHatText-Bold.woff2");
+    src: url("../assets/fonts/static/RedHatText-Bold.woff2");
     font-weight: 700;
     font-display: swap;
     font-style: normal;
